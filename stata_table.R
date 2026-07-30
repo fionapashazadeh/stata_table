@@ -4,12 +4,12 @@ stata_table <- function(x) {
 	labels$Code <- as.factor(labels$Code)
 	table <- as.data.frame(table(x, useNA = "ifany"))
 	colnames(table) <- c("Code", "Freq")
-	labels_table <- merge(labels, table, by = "Code", all.x = TRUE)
-	row.names(labels_table) <- row.names(labels)
+	stata_table <- merge(labels, table, by = "Code", all.x = TRUE)
+	row.names(stata_table) <- row.names(labels)
 	NAs <- table[nrow(table), ]
 	names(NAs) <- NULL
 	row.names(NAs) <- "Not matched"
 	print(attributes(x)$label)
 	ifelse(grepl("NA", NAs[1]), print(NAs), "")
-	print(labels_table)
+	print(stata_table)
 }
